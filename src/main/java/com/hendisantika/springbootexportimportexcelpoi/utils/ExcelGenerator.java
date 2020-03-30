@@ -49,7 +49,7 @@ public class ExcelGenerator {
             CellStyle headerCellStyle = workbook.createCellStyle();
             headerCellStyle.setFont(headerFont);
 
-            //Row ofor Header
+            //Row of Header
             Row headerRow = sheet.createRow(0);
 
             //Header
