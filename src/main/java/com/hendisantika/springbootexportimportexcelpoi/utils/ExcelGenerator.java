@@ -102,8 +102,14 @@ public class ExcelGenerator {
 
     }
 
-    private int CountRowExcel(Iterator<Row> rowIterator) {
-        return 0;
+    /* Cout Row of Excel Table */
+    public static int CountRowExcel(Iterator<Row> iterator) {
+        int size = 0;
+        while (iterator.hasNext()) {
+            Row row = iterator.next();
+            size++;
+        }
+        return size;
     }
 
 }
