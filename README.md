@@ -6,3 +6,13 @@
 3. Run the application: `mvn clean spring-boot:run`
 4. Navigate to browser: http://localhost:8080/import
 4. Navigate to browser: http://localhost:8080/export
+
+## Screen shot
+
+Import File
+
+![Import File](img/import.png "Import File")
+
+MySQL Database
+
+![MySQL Database](img/mysql.png "MySQL Database")
