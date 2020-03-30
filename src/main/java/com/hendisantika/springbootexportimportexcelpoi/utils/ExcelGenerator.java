@@ -13,9 +13,11 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -76,6 +78,32 @@ public class ExcelGenerator {
 
         }
         return null;
+    }
+
+    /* Import */
+    public void importExcel(MultipartFile file) throws Exception {
+
+        Workbook workbook = new XSSFWorkbook(file.getInputStream());
+        Sheet sheet = workbook.getSheetAt(0);
+
+        for (int i = 0; i < (CountRowExcel(sheet.rowIterator())); i++) {
+            if (i == 0) {
+                continue;
+            }
+
+            Row row = sheet.getRow(i);
+
+            String nama = row.getCell(1).getStringCellValue();
+            String kelas = row.getCell(2).getStringCellValue();
+            String jurusan = row.getCell(3).getStringCellValue();
+
+            studentRepository.save(new Student(0, nama, kelas, jurusan));
+        }
+
+    }
+
+    private int CountRowExcel(Iterator<Row> rowIterator) {
+        return 0;
     }
 
 }
