@@ -1,6 +1,7 @@
 package com.hendisantika.springbootexportimportexcelpoi.utils;
 
 import com.hendisantika.springbootexportimportexcelpoi.model.User;
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFFont;
@@ -8,8 +9,6 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.util.List;
-
-import static org.apache.poi.ss.util.CellUtil.createCell;
 
 /**
  * Created by IntelliJ IDEA.
@@ -46,6 +45,19 @@ public class UserExcelExporter {
         createCell(row, 2, "Full Name", style);
         createCell(row, 3, "Roles", style);
         createCell(row, 4, "Enabled", style);
+    }
+
+    private void createCell(Row row, int columnCount, Object value, CellStyle style) {
+        sheet.autoSizeColumn(columnCount);
+        Cell cell = row.createCell(columnCount);
+        if (value instanceof Integer) {
+            cell.setCellValue((Integer) value);
+        } else if (value instanceof Boolean) {
+            cell.setCellValue((Boolean) value);
+        } else {
+            cell.setCellValue((String) value);
+        }
+        cell.setCellStyle(style);
     }
 
 }
