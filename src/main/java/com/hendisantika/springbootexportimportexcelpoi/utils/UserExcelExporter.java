@@ -60,4 +60,25 @@ public class UserExcelExporter {
         cell.setCellStyle(style);
     }
 
+    private void writeDataLines() {
+        int rowCount = 1;
+
+        CellStyle style = workbook.createCellStyle();
+        XSSFFont font = workbook.createFont();
+        font.setFontHeight(14);
+        style.setFont(font);
+
+        for (User user : listUsers) {
+            Row row = sheet.createRow(rowCount++);
+            int columnCount = 0;
+
+            createCell(row, columnCount++, user.getId(), style);
+            createCell(row, columnCount++, user.getEmail(), style);
+            createCell(row, columnCount++, user.getFullName(), style);
+            createCell(row, columnCount++, user.getRoles().toString(), style);
+            createCell(row, columnCount++, user.isEnabled(), style);
+
+        }
+    }
+
 }
