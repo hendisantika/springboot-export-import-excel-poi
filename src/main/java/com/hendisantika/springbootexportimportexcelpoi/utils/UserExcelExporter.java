@@ -8,6 +8,9 @@ import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -77,8 +80,17 @@ public class UserExcelExporter {
             createCell(row, columnCount++, user.getFullName(), style);
             createCell(row, columnCount++, user.getRoles().toString(), style);
             createCell(row, columnCount++, user.isEnabled(), style);
-
         }
     }
 
+    public void export(HttpServletResponse response) throws IOException {
+        writeHeaderLine();
+        writeDataLines();
+
+        ServletOutputStream outputStream = response.getOutputStream();
+        workbook.write(outputStream);
+        workbook.close();
+
+        outputStream.close();
+    }
 }
