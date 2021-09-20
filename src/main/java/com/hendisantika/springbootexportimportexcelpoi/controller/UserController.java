@@ -1,5 +1,6 @@
 package com.hendisantika.springbootexportimportexcelpoi.controller;
 
+import com.hendisantika.springbootexportimportexcelpoi.model.User;
 import com.hendisantika.springbootexportimportexcelpoi.service.UserServices;
 import com.hendisantika.springbootexportimportexcelpoi.utils.UserExcelExporter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -36,7 +39,7 @@ public class UserController {
         String headerValue = "attachment; filename=users_" + currentDateTime + ".xlsx";
         response.setHeader(headerKey, headerValue);
 
-        List<User> listUsers = service.listAll();
+        List<User> listUsers = userServices.listAll();
 
         UserExcelExporter excelExporter = new UserExcelExporter(listUsers);
 

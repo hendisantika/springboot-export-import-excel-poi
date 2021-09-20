@@ -4,6 +4,8 @@
 </head>
 <body>
 
+<a th:href="@{/users/export/excel}">Export to Excel</a>
+
 <form enctype="multipart/form-data" method="post" th:action="@{/import}">
     <input name="file" type="file">
     <input type="submit" value="Import">
